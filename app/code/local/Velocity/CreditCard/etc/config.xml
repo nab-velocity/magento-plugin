@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       <Velocity_CreditCard>
+          <version>1.0.0</version>
+       </Velocity_CreditCard>
+    </modules>
+ 
+    <global>
+        <blocks>
+            <creditcard>
+                <class>Velocity_CreditCard_Block</class>
+            </creditcard>
+        </blocks>
+ 
+        <models>
+            <creditcard>
+                <class>Velocity_CreditCard_Model</class>
+                <resourceModel>creditcard_resource</resourceModel>
+            </creditcard>
+            <creditcard_resource>
+                <class>Velocity_CreditCard_Model_Resource</class>
+                <entities>
+                    <card>
+                        <table>velocity_transactions</table>
+                    </card>
+                </entities>
+            </creditcard_resource>
+	</models>
+ 
+        <helpers>
+            <creditcard>
+                <class>Velocity_CreditCard_Helper</class>
+            </creditcard>
+        </helpers>
+ 
+        <resources>
+            
+            <creditcard_setup>
+                <setup>
+                    <module>Velocity_CreditCard</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </creditcard_setup>
+            
+            <creditcard_write>
+                <connection>
+                  <use>core_write</use>
+                </connection>
+            </creditcard_write>
+            
+            <creditcard_read>
+               <connection>
+                <use>core_read</use>
+              </connection>
+            </creditcard_read>
+            
+	</resources>
+    </global>
+ 
+    <frontend>
+        <routers>
+           <checkout> <!-- Name of the core module-->
+             <args>
+                <modules>
+                    <Velocity_CreditCard before="Mage_Checkout">Velocity_CreditCard</Velocity_CreditCard>    
+                </modules>    
+             </args>
+          </checkout>
+       </routers>
+    </frontend>
+   
+    <default>
+        <payment>
+            <creditcard>
+                <active>1</active>
+                <model>creditcard/payment</model>
+                <order_status>pending</order_status>
+                <title>Credit Card (Velocity)</title>
+                <cctypes>AE,VI,MC,DI</cctypes>
+                <payment_action>authorize_capture</payment_action>
+                <test>1</test>
+                <allowspecific>0</allowspecific>
+            </creditcard>
+         </payment>
+    </default>   
+</config>
