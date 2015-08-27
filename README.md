@@ -16,9 +16,11 @@
           After Successful installation, click on top right corner 'Return to Admin' goto System -> Configuration then left side listed options select 'Payment Methods' and configure the velocity credentials.
 
     VELOCITY CREDENTIAL DETAILS
-    1.	WorkFlowId/ServiceId: - This is provided by velocity to merchant.
-    2.	MerchantProfileId: - This is provided by velocity to merchant.
-    3.	Test Mode :- This is for test the module, if select dropdwon 'yes' then test mode enable and no need to save “WorkFlowId/ServiceId & MerchantProfileId” otherwise select 'NO' from dropdwon and save  “WorkFlowId/ServiceId & MerchantProfileId” for live payment.
+    1.	IdentityToken: - This is security token provided by velocity to merchant.
+    2.	WorkFlowId/ServiceId: - This is service id provided by velocity to merchant.
+    3.	ApplicationProfileId: - This is application id provided by velocity to merchant.
+    4.	MerchantProfileId: - This is merchant id provided by velocity to merchant.
+    5.	Test Mode :- This is for test the module, if select dropdwon 'yes' then test mode enable and no need to save “WorkFlowId/ServiceId & MerchantProfileId” otherwise select 'NO' from dropdwon and save  “WorkFlowId/ServiceId & MerchantProfileId” for live payment.
 
     For Refund option at admin side from sales menu click on order option and selct invoice and option then right top cleck on 'Create Memo' and right bottom shows two type of refund one for offline and other of online then put refund ammount and process for refund.
 
