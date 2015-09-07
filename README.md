@@ -1,7 +1,7 @@
 
     Velocity Magento Module Installation Documentation 
 
-    1.	Download velocity Magento Module, .tgz file from velocity gateways.
+    1.	Download velocity Magento Module by clicking on Download zip button on the right bottom of this page.
 
     2.	Configuration Requirement: Magento site Version 1.9 or above version must be required for our velocity payment module installation.
 
@@ -9,7 +9,7 @@
     3.	Installation & Configuration of Module from Admin Panel:
           Login Magento admin panel and goto System Menu option then Magento connect option then Magento Connect Manager select display a panel for login page then login with same admin credential of magento admin panel.
 
-          Show two option for add the module one for online by url and other one is upload maudule package .tgz file and all installed module listed bellow.
+          Show two option for add the module one for online by url and other one is upload maudule package .tgz file only and all installed module listed bellow.
 
           Click on “Browse” option and select .tgz module file from system then Click on “Upload” button for upload the module in Magento module section and listed in “MODULES LIST” below.
 

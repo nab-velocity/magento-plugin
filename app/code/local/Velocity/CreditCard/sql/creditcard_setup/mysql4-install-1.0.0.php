@@ -10,7 +10,9 @@
 $installer = $this;
 $installer->startSetup();
 
-$table = $installer->getConnection()->newTable($installer->getTable('creditcard/card'))
+if(!$installer->getConnection()->isTableExists($installer->getTable('creditcard/card'))) {
+
+    $table = $installer->getConnection()->newTable($installer->getTable('creditcard/card'))
     ->addColumn('id', Varien_Db_Ddl_Table::TYPE_INTEGER, 11, array(
         'unsigned' => true,
         'nullable' => false,
@@ -32,5 +34,7 @@ $table = $installer->getConnection()->newTable($installer->getTable('creditcard/
         ), 'Response Object')
     ->setComment('Velocity Transactions Table');
 
-$installer->getConnection()->createTable($table);
+    $installer->getConnection()->createTable($table);
+}
+
 $installer->endSetup();
