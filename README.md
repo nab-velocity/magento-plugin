@@ -27,3 +27,5 @@
     For uninstall the velocity module of magento goto System Menu option then Magento connect option then Magento Connect Manager select display a panel for login page then login with same admin credential of magento admin panel.
 
     Show all instaled module listed bellow select unistall from drupdown and click on 'Commit Changes' button.
+	
+	4.  We have saved the raw request and response objects in &lt;prefix&gt;_velocity_transactions table.
