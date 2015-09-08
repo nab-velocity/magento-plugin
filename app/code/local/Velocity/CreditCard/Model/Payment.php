@@ -208,11 +208,27 @@ class Velocity_CreditCard_Model_Payment extends Mage_Payment_Model_Method_Cc
                     if ( is_array($cap_response) && !empty($cap_response) && isset($cap_response['Status']) && $cap_response['Status'] == 'Successful') {
                         $payment->setTransactionId($cap_response['TransactionId']);
                         $payment->setIsTransactionClosed(1);
+                        
+                        $xml = VelocityXmlCreator::authorizeandcaptureXML( array(
+                                'amount'       => $totals, 
+                                'avsdata'      => $avsData,
+                                'token'        => $response['PaymentAccountDataToken'], 
+                                'order_id'     => $orderId,
+                                'entry_mode'   => 'Keyed',
+                                'IndustryType' => 'Ecommerce',
+                                'Reference'    => 'xyz',
+                                'EmployeeId'   => '11'
+                        ));
+                        
+                        $req     = $xml->saveXML();
+                        $obj_req = serialize($req);
+                        
                         $insertData = array(
                            'transaction_id'     => $cap_response['TransactionId'],
                            'transaction_status' => $cap_response['Status'],
                            'order_id'           => $orderId,
-                           'response_obj'       => json_encode($cap_response)
+                           'request_obj'        => $obj_req,
+                           'response_obj'       => serialize($cap_response)
                         );
 
                         $collectionSet = Mage::getModel('creditcard/card');
@@ -258,6 +274,10 @@ class Velocity_CreditCard_Model_Payment extends Mage_Payment_Model_Method_Cc
                 'TransactionId' => $payment->_data['last_trans_id']
            ));
             
+           $xml = VelocityXmlCreator::returnByIdXML(number_format($amount, 2, '.', ''), $payment->_data['last_trans_id']);  // got ReturnById xml object.  
+
+           $req = $xml->saveXML();
+           $obj_req = serialize($req);
            Mage::log(print_r($response, 1));
            
            if (is_array($response) && !empty($response) && isset($response['Status']) && $response['Status'] == 'Successful') {
@@ -268,6 +288,7 @@ class Velocity_CreditCard_Model_Payment extends Mage_Payment_Model_Method_Cc
                     'transaction_id'     => $response['TransactionId'],
                     'transaction_status' => $response['Status'],
                     'order_id'           => $response['OrderId'],
+                    'request_obj'        => $obj_req,
                     'response_obj'       => json_encode($response)
                  );
 
