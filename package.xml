@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
     <name>Velocity</name>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
     <stability>devel</stability>
     <license>Open Software Licence (OSL)</license>
     <channel>community</channel>
@@ -10,7 +10,7 @@
     <description>Velocity payment gateway is fast growing gateway for the transaction with different facilities and this module is based on the intermediate solution to interact  with the gateway .</description>
     <notes>This is velocity payment module 1st stable version.</notes>
     <authors><author><name>Chetu Team</name><user>Ashish</user><email>ashishg2@chetu.com</email></author></authors>
-    <date>2015-09-15</date>
+    <date>2017-09-15</date>
     <time>11:16:13</time>
     <contents><target name="magelocal"><dir name="Velocity"><dir name="CreditCard"><dir name="Block"><dir name="Form"><file name="Cc.php" hash="188ff4b7a05e7c76c0906c7dcb5721cf"/></dir></dir><dir name="Helper"><file name="Data.php" hash="2bc167a3e5c6045988bd92a0261f25ae"/></dir><dir name="Model"><file name="Card.php" hash="d6f1e513b102cc13e5de8e6603e93364"/><file name="Payment.php" hash="b9c52ac45ca292833b492a97d2eafb24"/><dir name="Resource"><file name="Card.php" hash="c56dabde9ee6280f204427477f36de9d"/></dir></dir><dir name="etc"><file name="config.xml" hash="2208a76cce6c67ef67ec9f910a32dce1"/><file name="system.xml" hash="ab64e7b8fdac6bf85f499bc261009932"/></dir><dir name="sdk"><dir name="Velocity"><file name="Connection.php" hash="752864a85442a55a1a8ad2787f6866ca"/><file name="Errors.php" hash="8bec8d4e8e25c005bd1a646b117a998c"/><file name="Helpers.php" hash="a215674f3533f937c9c9cd4b6ae0ae00"/><file name="Message.php" hash="456f8e9ca59e5894ea4be100db14094a"/><file name="Processor.php" hash="a3109aa4367746bc1e03524bd0c824cb"/><file name="Transaction.php" hash="61cb8f40616485127bcf55bace830fd6"/><file name="XmlCreator.php" hash="7d6f711d26cef32abf8be81f24b8fd7b"/><file name="XmlParser.php" hash="05a5fae39210b7c12177ba72192fe1d2"/></dir><file name="Velocity.php" hash="dd66f5c8305c8e2c9f410bed099111c1"/><file name="configuration.php" hash="42513784328362d13498ca93741ef04e"/></dir><dir name="sql"><dir name="creditcard_setup"><file name="mysql4-install-1.0.0.php" hash="0ad6103703e646cfda4c8694997b5cfb"/><file name="mysql4-upgrade-1.0.0-1.2.0.php" hash="53d29140e5db67bffc5c8a4f5461aa6d"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="rwd"><dir name="default"><dir name="template"><dir name="creditcard"><file name="cc.phtml" hash="47cc17cc5f86a0336b8604d2b4fd68db"/></dir></dir></dir></dir></dir><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="template"><dir name="creditcard"><file name="cc.phtml" hash="49532ec3fede562b40a3c41747d34d91"/></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Velocity_CreditCard.xml" hash="603745fb72bdef08a7a310fb22148106"/></dir></target></contents>
     <compatible/>
