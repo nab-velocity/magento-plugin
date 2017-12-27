@@ -172,75 +172,56 @@ class Velocity_CreditCard_Model_Payment extends Mage_Payment_Model_Method_Cc
                   'track2data'  => ''
             );
 
-          
-            $response = $this->velocityProcessor->verify(array(  
-                    'amount'       => $totals,
-                    'avsdata'      => $avsData, 
-                    'carddata'     => $cardData,
-                    'entry_mode'   => 'Keyed',
-                    'IndustryType' => 'Ecommerce',
-                    'Reference'    => 'xyz',
-                    'EmployeeId'   => '11'
-            )); 
+			try {
+				$cap_response = $this->velocityProcessor->authorizeAndCapture( array(
+						'amount'       => $totals,
+						'avsdata'      => $avsData,
+						'carddata'     => $cardData,
+						'order_id'     => $orderId,
+						'entry_mode'   => 'Keyed',
+						'IndustryType' => 'Ecommerce',
+						'Reference'    => 'xyz',
+						'EmployeeId'   => '11'
+				));
 
-            if (isset($response['Status']) && $response['Status'] == 'Successful') {
-                
-                try {
-                    $cap_response = $this->velocityProcessor->authorizeAndCapture( array(
-                            'amount'       => $totals, 
-                            'avsdata'      => $avsData,
-                            'token'        => $response['PaymentAccountDataToken'], 
-                            'order_id'     => $orderId,
-                            'entry_mode'   => 'Keyed',
-                            'IndustryType' => 'Ecommerce',
-                            'Reference'    => 'xyz',
-                            'EmployeeId'   => '11'
-                    ));
-                    
-                    Mage::log(print_r($cap_response, 1));
-                    
-                    if ( is_array($cap_response) && !empty($cap_response) && isset($cap_response['Status']) && $cap_response['Status'] == 'Successful') {
-                        $payment->setTransactionId($cap_response['TransactionId']);
-                        $payment->setIsTransactionClosed(1);
-                        
-                        $xml = VelocityXmlCreator::authorizeandcaptureXML( array(
-                                'amount'       => $totals, 
-                                'avsdata'      => $avsData,
-                                'token'        => $response['PaymentAccountDataToken'], 
-                                'order_id'     => $orderId,
-                                'entry_mode'   => 'Keyed',
-                                'IndustryType' => 'Ecommerce',
-                                'Reference'    => 'xyz',
-                                'EmployeeId'   => '11'
-                        ));
-                        
-                        $req     = $xml->saveXML();
-                        $obj_req = serialize($req);
-                        
-                        $insertData = array(
-                           'transaction_id'     => $cap_response['TransactionId'],
-                           'transaction_status' => $cap_response['Status'],
-                           'order_id'           => $orderId,
-                           'request_obj'        => $obj_req,
-                           'response_obj'       => serialize($cap_response)
-                        );
+				Mage::log(print_r($cap_response, 1));
 
-                        $collectionSet = Mage::getModel('creditcard/card');
-                        $collectionSet->setData($insertData)->save();
-                    } else if ( is_array($cap_response) && !empty($cap_response) ) {
-                        $errorMsg = $this->_getHelper()->__($cap_response['StatusMessage']);
-                    } else {
-                        $errorMsg = $this->_getHelper()->__($cap_response);
-                    }
-                } catch(Exception $e) {
-                    Mage::throwException($e->getMessage());
-                }
-            } else if ((isset($response['Status']) && $response['Status'] != 'Successful')) {
-                $errorMsg = $this->_getHelper()->__($response['StatusMessage']);
-            } else {
-                $errorMsg = $this->_getHelper()->__($response);
-            }
-            
+				if ( is_array($cap_response) && !empty($cap_response) && isset($cap_response['Status']) && $cap_response['Status'] == 'Successful') {
+					$payment->setTransactionId($cap_response['TransactionId']);
+					$payment->setIsTransactionClosed(1);
+
+					$xml = VelocityXmlCreator::authorizeandcaptureXML( array(
+							'amount'       => $totals, 
+							'avsdata'      => $avsData,
+							'carddata'     => $cardData,
+							'order_id'     => $orderId,
+							'entry_mode'   => 'Keyed',
+							'IndustryType' => 'Ecommerce',
+							'Reference'    => 'xyz',
+							'EmployeeId'   => '11'
+					));
+
+					$req     = $xml->saveXML();
+					$obj_req = serialize($req);
+					
+					$insertData = array(
+					   'transaction_id'     => $cap_response['TransactionId'],
+					   'transaction_status' => $cap_response['Status'],
+					   'order_id'           => $orderId,
+					   'request_obj'        => $obj_req,
+					   'response_obj'       => serialize($cap_response)
+					);
+
+					$collectionSet = Mage::getModel('creditcard/card');
+					$collectionSet->setData($insertData)->save();
+				} else if ( is_array($cap_response) && !empty($cap_response) ) {
+					$errorMsg = $this->_getHelper()->__($cap_response['StatusMessage']);
+				} else {
+					$errorMsg = $this->_getHelper()->__($cap_response);
+				}
+			} catch(Exception $e) {
+				Mage::throwException($e->getMessage());
+			}
     	} catch(Exception $e) {
             Mage::throwException($e->getMessage());
 	}
