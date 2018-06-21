@@ -1,11 +1,12 @@
 Velocity Magento Module Installation Documentation 
 
-1.	Download velocity Magento Module by clicking on Download zip button on the right bottom of this page.
+1.	Configuration Requirement: Magento site Version 1.9 or above version must be required for our velocity payment module installation.
 
-2.	Configuration Requirement: Magento site Version 1.9 or above version must be required for our velocity payment module installation.
+2.	Download velocity Magento Module by clicking on Download zip button on the right bottom of this page.
 
+3.  Extract the zip and find the .tgz module file for upload and install. 
 
-3.	Installation & Configuration of Module from Admin Panel:
+4.	Installation & Configuration of Module from Admin Panel:
 	  Login Magento admin panel and goto System Menu option then Magento connect option then Magento Connect Manager select display a panel for login page then login with same admin credential of magento admin panel.
 
 	  Show two option for add the module one for online by url and other one is upload maudule package .tgz file only and all installed module listed bellow.
@@ -27,4 +28,4 @@ For uninstall the velocity module of magento goto System Menu option then Magent
 
 Show all instaled module listed bellow select unistall from drupdown and click on 'Commit Changes' button.
 
-4.  We have saved the raw request and response objects in &lt;prefix&gt;_velocity_transactions table.
+5.  We have saved the raw request and response objects in &lt;prefix&gt;_velocity_transactions table.
